@@ -1,8 +1,19 @@
+import java.util.ArrayList;
 
 public class Vertice {
 
 	public Vertice() {
-		// TODO Auto-generated constructor stub
 	}
 
+	String nome;
+	ArrayList<Aresta> listaAresta;
+	ArrayList<Vertice> listaVizinhos;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public ArrayList<Vertice> getVizinhos() {
+		return listaVizinhos;
+	}
 }
