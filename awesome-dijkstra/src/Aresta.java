@@ -1,16 +1,16 @@
-import java.util.List;
-
 public class Aresta {
 
 	public Aresta() {
 	}
 
-	String nome;
-	Vertice v1;
-	Vertice v2;
+	int nome;
 
-	public String getNome() {
+	public int getNome() {
 		return nome;
+	}
+
+	public void setNome(int aresta) {
+		nome = aresta;
 	}
 
 }

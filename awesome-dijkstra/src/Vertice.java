@@ -1,3 +1,4 @@
+import java.awt.List;
 import java.util.ArrayList;
 
 public class Vertice {
@@ -5,15 +6,27 @@ public class Vertice {
 	public Vertice() {
 	}
 
-	String nome;
+	char nome;
 	ArrayList<Aresta> listaAresta;
-	ArrayList<Vertice> listaVizinhos;
+	char[] listaVizinhos;
 
-	public String getNome() {
+	public char getNome() {
 		return nome;
 	}
 
-	public ArrayList<Vertice> getVizinhos() {
+	public char[] getVizinhos() {
 		return listaVizinhos;
+	}
+
+	public void setNome(char vertice) {
+		nome = vertice;
+	}
+
+	public void setVizinho(char v) {
+		listaVizinhos[listaVizinhos.length] = v;
+	}
+	
+	public void setArestas(Aresta a) {
+		listaAresta.add(a);
 	}
 }
