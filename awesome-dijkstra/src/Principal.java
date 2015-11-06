@@ -2,22 +2,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
-public class Principal extends JFrame {
-
-	public static void main(String[] args) throws IOException {
-		// Escrendo e lendo Console
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Digite o diretorio do arquivo: ");
-		String str = in.readLine();
-
-		// Manipulando os dados do Arquivo
-		Grafo g = new Grafo(lerArquivoCVS(str));
-		System.out.println(g.getVertices());
-	}
+public class Principal {
 
 	// Lê o arquivo do tipo .CVS e monta um vetor de String com os valores
 	// recebidos do arquivo
@@ -50,5 +38,25 @@ public class Principal extends JFrame {
 			}
 		}
 		return adjacencia;
+	}
+
+	public static void main(String[] args) throws IOException {
+
+		String nome = null;
+		while (nome == null || nome.equals("")) {
+			nome = JOptionPane
+					.showInputDialog("Coloque o arquivo .CSV com a matriz de adjacência no diretório raiz do projeto. \nPara informa o nome do arquivo, você deve seguir o exemplo abaixo:\nEX: Grafo Trabalho Dijkstra.csv\n\n\nQual o nome do arquivo?");
+			if (nome == null || nome.equals("")) {
+				JOptionPane.showMessageDialog(null,
+						"Você não respondeu a pergunta.");
+			}
+		}
+		try {
+			Grafo g = new Grafo(lerArquivoCVS(nome));
+			JOptionPane.showMessageDialog(null,
+					"Algoritmo de Dijkstra executado com sucesso!");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Arquivo invalido!");
+		}
 	}
 }

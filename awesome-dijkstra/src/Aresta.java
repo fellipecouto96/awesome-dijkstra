@@ -1,9 +1,9 @@
 public class Aresta {
 
+	int nome;
+
 	public Aresta() {
 	}
-
-	int nome;
 
 	public int getNome() {
 		return nome;

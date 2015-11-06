@@ -2,6 +2,16 @@ import java.util.ArrayList;
 
 public class Grafo {
 
+	ArrayList<Aresta> listaAresta;
+
+	ArrayList<Vertice> listaVertice;
+
+	int[][] matrizAdjac;
+	String nome;
+	// Construtor vazio
+	public Grafo() {
+
+	}
 	// Construtor que monta o grafo
 	public Grafo(String[] matriz) {
 		listaAresta = new ArrayList<>();
@@ -11,15 +21,10 @@ public class Grafo {
 		montaArestas();
 	}
 
-	// Construtor vazio
-	public Grafo() {
-
+	// Retorna minha lista de arestas
+	public ArrayList<Aresta> getArestas() {
+		return listaAresta;
 	}
-
-	String nome;
-	ArrayList<Aresta> listaAresta;
-	ArrayList<Vertice> listaVertice;
-	int[][] matrizAdjac;
 
 	// Retorna o nome do meu grafo
 	public String getNome() {
@@ -31,9 +36,16 @@ public class Grafo {
 		return listaVertice;
 	}
 
-	// Retorna minha lista de arestas
-	public ArrayList<Aresta> getArestas() {
-		return listaAresta;
+	// Monta a lista de arestas com a matriz de adjacencia.
+	private void montaArestas() {
+		Aresta a;
+		for (int l = 0; l < matrizAdjac.length; l++) {
+			for (int c = 0; c < matrizAdjac.length; c++) {
+				a = new Aresta();
+				a.setNome(matrizAdjac[l][c]);
+				listaAresta.add(a);
+			}
+		}
 	}
 
 	// Monta minha matriz de adjacencia
@@ -77,18 +89,6 @@ public class Grafo {
 				}
 			}
 			listaVertice.add(v);
-		}
-	}
-
-	// Monta a lista de arestas com a matriz de adjacencia.
-	private void montaArestas() {
-		Aresta a;
-		for (int l = 0; l < matrizAdjac.length; l++) {
-			for (int c = 0; c < matrizAdjac.length; c++) {
-				a = new Aresta();
-				a.setNome(matrizAdjac[l][c]);
-				listaAresta.add(a);
-			}
 		}
 	}
 }
