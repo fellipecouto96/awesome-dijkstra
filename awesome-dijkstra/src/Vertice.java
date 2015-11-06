@@ -4,17 +4,20 @@ import java.util.ArrayList;
 public class Vertice {
 
 	public Vertice() {
+		listaAresta = new ArrayList<>();
+		listaVizinhos = new ArrayList<>();
 	}
 
 	char nome;
 	ArrayList<Aresta> listaAresta;
-	char[] listaVizinhos;
+	int qntVizinhos;
+	ArrayList<Object> listaVizinhos;
 
 	public char getNome() {
 		return nome;
 	}
 
-	public char[] getVizinhos() {
+	public ArrayList<Object> getVizinhos() {
 		return listaVizinhos;
 	}
 
@@ -23,7 +26,7 @@ public class Vertice {
 	}
 
 	public void setVizinho(char v) {
-		listaVizinhos[listaVizinhos.length] = v;
+		listaVizinhos.add(v);
 	}
 	
 	public void setArestas(Aresta a) {

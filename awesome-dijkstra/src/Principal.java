@@ -9,12 +9,12 @@ import javax.swing.JFrame;
 public class Principal extends JFrame {
 
 	public static void main(String[] args) throws IOException {
-		//Escrendo e lendo Console
-		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));  
+		// Escrendo e lendo Console
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("Digite o diretorio do arquivo: ");
-		String str = in.readLine(); 
-		
-		//Manipulando os dados do Arquivo
+		String str = in.readLine();
+
+		// Manipulando os dados do Arquivo
 		Grafo g = new Grafo(lerArquivoCVS(str));
 		System.out.println(g.getVertices());
 	}
@@ -29,10 +29,11 @@ public class Principal extends JFrame {
 
 		try {
 			buffer = new BufferedReader(new FileReader(arquivo));
-
+			String linhaAux = "";
 			while ((linha = buffer.readLine()) != null) {
-				adjacencia = linha.split(csvDivisor);
+				linhaAux = linhaAux + linha + ";";
 			}
+			adjacencia = linhaAux.split(csvDivisor);
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -50,5 +51,4 @@ public class Principal extends JFrame {
 		}
 		return adjacencia;
 	}
-
 }

@@ -4,6 +4,8 @@ public class Grafo {
 
 	// Construtor que monta o grafo
 	public Grafo(String[] matriz) {
+		listaAresta = new ArrayList<>();
+		listaVertice = new ArrayList<>();
 		montaMatriz(matriz);
 		montaVertices();
 		montaArestas();
@@ -55,12 +57,12 @@ public class Grafo {
 		char nome = 'A';
 
 		// Percorrendo as linhas da matriz de adjacencia
-		for (int l = 0; l < Math.sqrt(matrizAdjac.length); l++) {
+		for (int l = 0; l < matrizAdjac.length; l++) {
 			v = new Vertice();
 			v.setNome(nome);
 			nome++;
 			// Percorrendo as colunas da Matriz de adjacencia
-			for (int c = 0; l < Math.sqrt(matrizAdjac.length); c++) {
+			for (int c = 0; c < matrizAdjac.length; c++) {
 				if (matrizAdjac[l][c] != 0) {
 
 					// Inserindo a aresta na lista de arestas
@@ -81,8 +83,8 @@ public class Grafo {
 	// Monta a lista de arestas com a matriz de adjacencia.
 	private void montaArestas() {
 		Aresta a;
-		for (int l = 0; l < Math.sqrt(matrizAdjac.length); l++) {
-			for (int c = 0; c < Math.sqrt(matrizAdjac.length); c++) {
+		for (int l = 0; l < matrizAdjac.length; l++) {
+			for (int c = 0; c < matrizAdjac.length; c++) {
 				a = new Aresta();
 				a.setNome(matrizAdjac[l][c]);
 				listaAresta.add(a);
