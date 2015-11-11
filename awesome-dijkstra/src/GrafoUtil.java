@@ -121,7 +121,7 @@ public class GrafoUtil {
 	}
 
 	public static void imprimeMenorCaminho(Grafo grafo) throws IOException {
-		FileWriter arq = new FileWriter("dijkstra.txt");
+		FileWriter arq = new FileWriter("Dijkstra.txt", true);
 		PrintWriter gravarArq = new PrintWriter(arq);
 
 		// Imprime Cabeçalho

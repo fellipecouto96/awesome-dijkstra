@@ -95,7 +95,7 @@ public class Principal {
 		}
 		try {
 			JOptionPane.showMessageDialog(null,
-					"Para conferir o resultado favor verificar o arquivo .txt no diretorio raiz do projeto.\n\nAlgoritmo de Dijkstra executado com sucesso!");
+					"Para conferir o resultado favor verificar o arquivo Dijkstra.txt no diretorio raiz do projeto.\n\nAlgoritmo de Dijkstra executado com sucesso!");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Arquivo invalido!");
 		}
