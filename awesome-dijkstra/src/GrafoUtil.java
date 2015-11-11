@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -29,7 +32,7 @@ public class GrafoUtil {
 
 		for (Aresta aresta : vertice.getArestas()) {
 			if (aresta.getStatus().equals(UNVISITED)) {
-				Vertice w = Grafo.opposite(vertice, aresta);
+				Vertice w = Grafo.oposto(vertice, aresta);
 				if (w.getStatus().equals(UNVISITED)) {
 					aresta.setStatus(VISITED);
 					w.setStatus(VISITED);
@@ -117,12 +120,23 @@ public class GrafoUtil {
 		return path;
 	}
 
-	public static void imprimeMenorCaminho(Grafo grafo) {
-		System.out.println("IMPRIME MENOR CAMINHO");
+	public static void imprimeMenorCaminho(Grafo grafo) throws IOException {
+		FileWriter arq = new FileWriter("dijkstra.txt");
+		PrintWriter gravarArq = new PrintWriter(arq);
+
+		// Imprime Cabeçalho
+		gravarArq.printf("+--    MENOR CAMINHO - Algoritmo de Dijkstra   --+%n");
+
 		for (Vertice v : grafo.vertices()) {
-			System.out.println("Distancia até " + v.getName() + ": " + v.getDist());
+			gravarArq.printf("Distancia até " + v.getName() + ": " + v.getDist());
 			List<Vertice> path = getMenorCaminho(v);
-			System.out.println("Caminho: " + path);
+			gravarArq.printf("Caminho: " + path);
 		}
+
+		// Rodape
+		gravarArq.printf("+-------------+%n");
+
+		// Fecha arquivo
+		arq.close();
 	}
 }

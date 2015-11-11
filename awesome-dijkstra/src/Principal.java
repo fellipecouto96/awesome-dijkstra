@@ -106,7 +106,12 @@ public class Principal {
 		Grafo g = criarGrafo(menuPrincipal());
 
 		Vertice v = g.getVertice(0);
-		
+
+		GrafoUtil.buscaProfundidade(v);
+		GrafoUtil.resetStatus(g);
+		GrafoUtil.buscaLargura(v);
+		GrafoUtil.resetStatus(g);
 		GrafoUtil.dijkstra(v);
+		GrafoUtil.imprimeMenorCaminho(g);
 	}
 }
