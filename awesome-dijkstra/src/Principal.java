@@ -3,15 +3,25 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
 public class Principal {
 
+	// Converte o vertice digitado em indice numerico
+	private static int converteCharinIndex(char[] valor) {
+		char aux = 'A';
+		int index = 0;
+		while (valor[0] != aux) {
+			aux++;
+			index++;
+		}
+		return index;
+	}
+
 	// Le o arquivo do tipo .CVS e monta um vetor de String com os valores
 	// recebidos do arquivo
-	public static String[] lerArquivoCVS(String arquivo) {
+	private static String[] lerArquivoCVS(String arquivo) {
 		BufferedReader buffer = null;
 		String linha = "";
 		String csvDivisor = ";";
@@ -26,7 +36,8 @@ public class Principal {
 			adjacencia = linhaAux.split(csvDivisor);
 
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Arquivo invalido! Tente novamente.");
+			menuPrincipal();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -56,6 +67,7 @@ public class Principal {
 		return matrizAdjac;
 	}
 
+	// Cria grafo com base na matriz lida no arquivo .CSV
 	private static Grafo criarGrafo(String[] adjacencia) throws VerticeException {
 		Grafo g = new Grafo();
 		Vertice v;
@@ -81,37 +93,65 @@ public class Principal {
 		return g;
 	}
 
+	// Menu principal
 	private static String[] menuPrincipal() {
 		String[] listaAdjacencia = null;
 		String nome = null;
 
 		while (nome == null || nome.equals("")) {
 			nome = JOptionPane.showInputDialog(
-					"Coloque o arquivo .CSV com a matriz de adjacencia no diretorio raiz do projeto. \nPara informa o nome do arquivo, voce deve seguir o exemplo abaixo:\nEX: Grafo Trabalho Dijkstra.csv\n\n\nQual o nome do arquivo?");
-			if (nome == null || nome.equals("")) {
-				JOptionPane.showMessageDialog(null, "Voce nao respondeu a pergunta.");
+					"                    INFORMAÇÕES IMPORTANTES!\nPara o funcionamento do sistema, seu arquivo .CSV\ncontendo a matriz deve estar no diretorio raiz do projeto.\n\nDigite o nome do seu arquivo .CSV.");
+			if (nome == null) {
+				System.exit(0);
+			} else if (nome.equals("")) {
+				JOptionPane.showMessageDialog(null, "Voce não respondeu a pergunta!");
+
 			}
-			listaAdjacencia = lerArquivoCVS(nome);
 		}
 		try {
-			JOptionPane.showMessageDialog(null,
-					"Para conferir o resultado favor verificar o arquivo Dijkstra.txt no diretorio raiz do projeto.\n\nAlgoritmo de Dijkstra executado com sucesso!");
+			listaAdjacencia = lerArquivoCVS(nome);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Arquivo invalido!");
+			System.out.println("Erro ao ler arquivo: " + e);
 		}
 		return listaAdjacencia;
 	}
 
 	public static void main(String[] args) throws IOException, VerticeException {
+		// Criação dos parametros utilizados
+		char[] verticeIncial;
+		String valorAux = null;
+		int index;
+		Vertice v = null;
 		Grafo g = criarGrafo(menuPrincipal());
 
-		Vertice v = g.getVertice(0);
+		// Menu secundario para escolha de vertice inicial
+		while (valorAux == null || valorAux.equals("")) {
+			valorAux = JOptionPane.showInputDialog(
+					"       INFORMAÇÕES IMPORTANTES!\n  Para o funcionamento do sistema\nVocê deve digitar apenas uma letra.\n\nVertice inicial:");
+			valorAux.toUpperCase();
+			verticeIncial = valorAux.toCharArray();
+			index = converteCharinIndex(verticeIncial);
+			if (verticeIncial == null) {
+				System.exit(0);
+			} else if (verticeIncial.equals("")) {
+				JOptionPane.showMessageDialog(null, "Voce não respondeu a pergunta!");
+			}
 
-		GrafoUtil.buscaProfundidade(v);
-		GrafoUtil.resetStatus(g);
-		GrafoUtil.buscaLargura(v);
-		GrafoUtil.resetStatus(g);
-		GrafoUtil.dijkstra(v);
-		GrafoUtil.imprimeMenorCaminho(g);
+			// Validação do vertice (Vertice existente ou inexistente).
+			if (index < g.numVertices()) {
+				v = g.getVertice(index);
+			} else {
+				JOptionPane.showMessageDialog(null, "Vertice inexistente na matriz!");
+				menuPrincipal();
+			}
+
+			// Execução do algoritimo de Dijkstra
+			GrafoUtil.buscaProfundidade(v);
+			GrafoUtil.resetStatus(g);
+			GrafoUtil.buscaLargura(v);
+			GrafoUtil.resetStatus(g);
+			GrafoUtil.dijkstra(v);
+			GrafoUtil.imprimeMenorCaminho(g);
+		}
 	}
 }
