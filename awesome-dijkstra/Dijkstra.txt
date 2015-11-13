@@ -1,0 +1,11 @@
++--    MENOR CAMINHO - Algoritmo de Dijkstra   --+
+
+Distancia até A: 2 | Caminho: D -> A
+Distancia até B: 5 | Caminho: D -> A -> C -> B
+Distancia até C: 4 | Caminho: D -> A -> C
+Distancia até D: 0 | Caminho: D
+Distancia até E: 1 | Caminho: D -> E
+Distancia até F: 5 | Caminho: D -> E -> F
+Distancia até G: 2 | Caminho: D -> G
+
++------------------------------------------------+
